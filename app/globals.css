@@ -1,3 +1,7 @@
+body {
+    background-color: #cfd8dc;
+}
+
 @media (max-width: 700px) {
     body {
         overflow: hidden;
