@@ -1,11 +1,28 @@
 import { useState, useRef, useEffect } from 'react';
 
+class points {
+    point_cnt = 0;
+    xs: number[] = [];
+    ys: number[] = [];
+};
+var ctx, canvas;
+var strokes: points[] = [];
+var currentStroke: points = new points();
+
+export function undo() {
+    strokes.pop();
+}
+
+export function clear() {
+    console.log('clear');
+}
+
 export default function Canvas(props: {size: number}) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
-        const canvas = canvasRef.current;
-        const ctx = canvas?.getContext('2d');
+        canvas = canvasRef.current;
+        ctx = canvas?.getContext('2d');
         if (ctx) {
             ctx.clearRect(0, 0, props.size, props.size);
             ctx.fillStyle = 'red';
