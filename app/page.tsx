@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import Canvas, {undo, clear} from './components/canvas';
+import Canvas from './components/canvas';
 import {Box, Paper, Typography, Button, Stack, useMediaQuery} from '@mui/material/';
 import { blueGrey } from '@mui/material/colors';
 import styles from './page.module.css';
@@ -17,19 +17,7 @@ export default function Home() {
                 </Typography>
             </Paper>
             <Stack direction={isMobile ? 'column' : 'row'} spacing={2} sx={{height: '100%'}} justifyContent="center">
-                <Paper sx={{backgroundColor: blueGrey[500], height: '100%', padding: 2, width: (isMobile ? '100%' : '50%')}} elevation={5}>
-                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <Button variant='contained' sx={{margin: '10px'}} onClick={clear}>
-                        Clear
-                    </Button>
-                    <Button variant='contained' sx={{margin: '10px'}} onClick={undo}>
-                        Undo
-                    </Button>
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: '10px' }}>
-                        <Canvas size={400}></Canvas>
-                    </div>
-                </Paper>
+                <Canvas size={400}></Canvas>
                 <Paper sx={{backgroundColor: blueGrey[500], height: '100%', padding: 2, width: (isMobile ? '100%' : '50%')}} elevation={5}>
                     <Button variant='contained' sx={{margin: '10px'}}>
                         Predict
