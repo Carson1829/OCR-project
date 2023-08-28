@@ -73,6 +73,10 @@ export default function Canvas(props: {size: number}) {
         ctx.lineCap = 'round';
         for (var i = 0; i < strokes.length; i++) {
             ctx.beginPath();
+            ctx.arc(strokes[i].xs[0], strokes[i].ys[0], 1, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
             ctx.moveTo(strokes[i].xs[0], strokes[i].ys[0]);
             for (var j = 1; j < strokes[i].point_cnt; j++) {
                 ctx.lineTo(strokes[i].xs[j], strokes[i].ys[j]);
