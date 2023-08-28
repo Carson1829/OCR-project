@@ -2,7 +2,7 @@
 import * as React from 'react';
 import Canvas from './components/canvas';
 import {Box, Paper, Typography, Button, Stack, useMediaQuery} from '@mui/material/';
-import { blueGrey } from '@mui/material/colors';
+import { blueGrey, pink } from '@mui/material/colors';
 import styles from './page.module.css';
 
 export default function Home() {
@@ -11,15 +11,15 @@ export default function Home() {
     return (
         <Box sx={{width: '98%', height: '100%'}} margin={'1%'}>
         <Stack spacing={3} sx={{height: '95%'}} padding={1} justifyContent="center">
-            <Paper sx={{backgroundColor: blueGrey[500] }} elevation={10}>
+            <Paper sx={{backgroundColor: blueGrey[300] }} elevation={10}>
                 <Typography variant="h2" margin={2} className={styles.heading}>
                     ECS 170 Optical Character Recognition Demo
                 </Typography>
             </Paper>
             <Stack direction={isMobile ? 'column' : 'row'} spacing={2} sx={{height: '100%'}} justifyContent="center">
                 <Canvas size={400}></Canvas>
-                <Paper sx={{backgroundColor: blueGrey[500], height: '100%', padding: 2, width: (isMobile ? '100%' : '50%')}} elevation={5}>
-                    <Button variant='contained' sx={{margin: '10px'}}>
+                <Paper sx={{backgroundColor: blueGrey[300], height: '100%', padding: 2, width: (isMobile ? '100%' : '50%')}} elevation={5}>
+                    <Button variant='contained' sx={{margin: '10px', backgroundColor: blueGrey[700], '&:hover': {backgroundColor: blueGrey[900]}}}>
                         Predict
                     </Button>
                     <Typography variant="h5" sx={{margin: '10px'}}>
