@@ -17,14 +17,16 @@ export default function Home() {
                 </Typography>
             </Paper>
             <Stack direction={isMobile ? 'column' : 'row'} spacing={2} sx={{height: '100%'}} justifyContent="center">
-                <Canvas size={400}></Canvas>
-                <Paper sx={{backgroundColor: blueGrey[300], height: '100%', padding: 2, width: (isMobile ? '100%' : '50%')}} elevation={5}>
+                <Canvas size={isMobile ? 320 : 400}></Canvas>
+                <Paper sx={{backgroundColor: blueGrey[300], height: '100%', padding: 2, width: (isMobile ? '90%' : '50%')}} elevation={5}>
+                <div style={isMobile ? { display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' } : {}}>
                     <Button variant='contained' sx={{margin: '10px', backgroundColor: blueGrey[700], '&:hover': {backgroundColor: blueGrey[900]}}}>
                         Predict
                     </Button>
                     <Typography variant="h5" sx={{margin: '10px'}}>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Est debitis vel soluta minima aliquam architecto aliquid voluptatem esse quibusdam excepturi repellendus culpa accusantium officia, assumenda inventore eligendi laudantium adipisci dignissimos.
                     </Typography>
+                </div>
                 </Paper>
             </Stack>
         </Stack>

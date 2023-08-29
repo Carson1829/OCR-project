@@ -109,7 +109,7 @@ export default function Canvas(props: {size: number}) {
     };
 
     return (
-        <Paper sx={{backgroundColor: blueGrey[300], height: '100%', padding: 2, width: (isMobile ? '100%' : '50%')}} elevation={5}>
+        <Paper sx={{backgroundColor: blueGrey[300], height: '100%', padding: 2, width: (isMobile ? '90%' : '50%')}} elevation={5}>
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
             <Button variant='contained' sx={{margin: '10px', backgroundColor: blueGrey[700], '&:hover': {backgroundColor: blueGrey[900]}}} onClick={clear}>
                     Clear
