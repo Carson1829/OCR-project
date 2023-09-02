@@ -1,26 +1,48 @@
 'use client';
 import * as React from 'react';
 import Canvas from './components/canvas';
-import {Box, Paper, Typography, Button, Stack, useMediaQuery} from '@mui/material/';
+import { Box, Paper, Typography, Button, Stack, useMediaQuery, createTheme, ThemeProvider } from '@mui/material/';
 import { blueGrey } from '@mui/material/colors';
 import styles from './page.module.css';
 
+export const theme = createTheme({
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 700,
+            md: 960,
+            lg: 1280,
+            xl: 1920,
+        }
+    },
+    palette: {
+        primary: {
+            main: blueGrey[700],
+            light: blueGrey[300],
+            dark: blueGrey[900],
+        },
+    },
+});
+
 export default function Home() {
     const isMobile = useMediaQuery('(max-width: 700px)');
-
+    const primary_color = theme.palette.primary;
     return (
+        <ThemeProvider theme={theme}>
+        {/* TODO: maybe refactor stylings to css module */}
         <Box sx={{width: '98%', height: '100%'}} margin={'1%'} justifyContent="center">
         <Stack spacing={3} sx={{height: '95%'}} padding={1} justifyContent="center">
-            <Paper sx={{backgroundColor: blueGrey[300] }} elevation={10}>
+            <Paper sx={{backgroundColor: primary_color.light }} elevation={10}>
                 <Typography variant="h2" margin={2} className={styles.heading}>
                     ECS 170 Optical Character Recognition Demo
                 </Typography>
             </Paper>
-            <Stack direction={isMobile ? 'column' : 'row'} spacing={2} sx={{height: '100%'}} justifyContent="center">
-                <Canvas />
-                <Paper sx={{backgroundColor: blueGrey[300], height: '100%', padding: (isMobile ? 0 : 2), width: (isMobile ? '98%' : '50%')}} elevation={5}>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{height: '100%'}} justifyContent="center">
+                <Canvas xs={320} sm={400} />
+                <Paper sx={{backgroundColor: primary_color.light, height: '100%', padding:{ xs: 0, sm: 2 }, width: {xs: '98%', sm: '50%'}}} elevation={5}>
                 <div style={isMobile ? { display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' } : {}}>
-                    <Button variant='contained' sx={{margin: '10px', backgroundColor: blueGrey[700], '&:hover': {backgroundColor: blueGrey[900]}}}>
+                    {/* TODO: implement predict button and text */}
+                    <Button variant='contained' sx={{margin: '10px', backgroundColor: theme.palette.primary.main, '&:hover': {backgroundColor: blueGrey[900]}}}>
                         Predict
                     </Button>
                     <Typography variant="h5" sx={{margin: '10px'}}>
@@ -31,5 +53,6 @@ export default function Home() {
             </Stack>
         </Stack>
         </Box>
+        </ThemeProvider>
     );
 }

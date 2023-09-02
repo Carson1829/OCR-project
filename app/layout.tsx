@@ -5,7 +5,8 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'ECS 170 OCR Demo'
+    title: 'ECS 170 OCR Demo',
+    description: 'Optical Character Recognition Demo for ECS 170',
 }
 
 export default function RootLayout({

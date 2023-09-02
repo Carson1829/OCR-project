@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button, Paper, useMediaQuery } from '@mui/material';
-import { blueGrey } from '@mui/material/colors';
+import { theme } from '../page';
 
 class points {
     point_cnt = 0;
@@ -8,14 +8,15 @@ class points {
     ys: number[] = [];
 };
 
-export default function Canvas() {
-    const [mobileCanvas, setMobileCanvas] = useState(false);
-    const isMobile = useMediaQuery('(max-width: 700px)');
+export default function Canvas({ xs, sm }: { xs: number, sm: number }) {
+    const primary_color = theme.palette.primary;
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const [mobileCanvas, setMobileCanvas] = useState(isMobile);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [isDrawing, setIsDrawing] = useState(false);
     const [currentStroke, setCurrentStroke] = useState<points>(new points());
     const [strokes, setStrokes] = useState<points[]>([]);
-    const [size, setSize] = useState(400);
+    const [size, setSize] = useState(mobileCanvas ? xs : sm);
     const [left, setL] = useState(0);
     const [top, setTop] = useState(0);
 
@@ -24,6 +25,8 @@ export default function Canvas() {
         var canvas = canvasRef.current;
         var ctx = canvas?.getContext('2d');
         if (!canvas || !ctx) return;
+        setMobileCanvas(isMobile);
+        setSize(isMobile ? xs : sm);
         setL(canvas.getBoundingClientRect().left);
         setTop(canvas.getBoundingClientRect().top);
 
@@ -192,12 +195,12 @@ export default function Canvas() {
     };
 
     return (
-        <Paper sx={{backgroundColor: blueGrey[300], height: '100%', padding: (isMobile ? 0 : 2), width: (isMobile ? '98%' : '50%')}} elevation={5}>
+        <Paper sx={{backgroundColor: primary_color.light, height: '100%', padding: { xs: 0, sm: 2 }, width: {xs: '98%', sm: '50%'}}} elevation={5}>
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                <Button variant='contained' sx={{margin: '10px', backgroundColor: blueGrey[700], '&:hover': {backgroundColor: blueGrey[900]}}} onClick={clear}>
+                <Button variant='contained' sx={{margin: '10px', backgroundColor: primary_color.main, '&:hover': {backgroundColor: primary_color.dark}}} onClick={clear}>
                     Clear
                 </Button>
-                <Button variant='contained' sx={{margin: '10px', backgroundColor: blueGrey[700], '&:hover': {backgroundColor: blueGrey[900]}}} onClick={undo}>
+                <Button variant='contained' sx={{margin: '10px', backgroundColor: primary_color.main, '&:hover': {backgroundColor: primary_color.dark}}} onClick={undo}>
                     Undo
                 </Button>
             </div>
