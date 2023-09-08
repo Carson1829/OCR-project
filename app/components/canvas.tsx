@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button, Paper, useMediaQuery } from '@mui/material';
-import { theme } from '../page';
+import { theme } from './theme';
 
 class points {
     point_cnt = 0;

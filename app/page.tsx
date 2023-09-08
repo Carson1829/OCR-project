@@ -1,28 +1,10 @@
 'use client';
 import * as React from 'react';
 import Canvas from './components/canvas';
-import { Box, Paper, Typography, Button, Stack, useMediaQuery, createTheme, ThemeProvider } from '@mui/material/';
+import { Box, Paper, Typography, Button, Stack, useMediaQuery, ThemeProvider } from '@mui/material/';
 import { blueGrey } from '@mui/material/colors';
 import styles from './page.module.css';
-
-export const theme = createTheme({
-    breakpoints: {
-        values: {
-            xs: 0,
-            sm: 700,
-            md: 960,
-            lg: 1280,
-            xl: 1920,
-        }
-    },
-    palette: {
-        primary: {
-            main: blueGrey[700],
-            light: blueGrey[300],
-            dark: blueGrey[900],
-        },
-    },
-});
+import { theme } from './components/theme';
 
 export default function Home() {
     const isMobile = useMediaQuery('(max-width: 700px)');
