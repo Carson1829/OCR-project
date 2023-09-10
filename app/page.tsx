@@ -1,6 +1,8 @@
 "use client";
-import * as React from "react";
+
+import { useRef } from "react";
 import Canvas from "./components/canvas";
+import axios from "axios";
 import {
   Box,
   Paper,
@@ -17,6 +19,29 @@ import { theme } from "./components/theme";
 export default function Home() {
   const isMobile = useMediaQuery("(max-width: 700px)");
   const primary_color = theme.palette.primary;
+  const canvasRef = useRef<HTMLCanvasElement>();
+
+  const handlePredict = () => {
+    canvasRef.current?.toBlob(async (blob) => {
+      if (blob) {
+        try {
+          const formData = new FormData();
+          formData.append("handwritting.jpeg", blob);
+          const res = await axios.post(
+            "http://52.9.58.36:5000/predict",
+            formData,
+            {
+              headers: { "Content-Type": "multipart/form-data" }
+            }
+          );
+          console.log(res);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    });
+  };
+
   return (
     <ThemeProvider theme={theme}>
       {/* TODO: maybe refactor stylings to css module */}
@@ -42,7 +67,7 @@ export default function Home() {
             sx={{ height: "100%" }}
             justifyContent="center"
           >
-            <Canvas xs={320} sm={400} />
+            <Canvas xs={320} sm={400} canvasRef={canvasRef} />
             <Paper
               sx={{
                 backgroundColor: primary_color.light,
@@ -72,6 +97,7 @@ export default function Home() {
                     "backgroundColor": theme.palette.primary.main,
                     "&:hover": { backgroundColor: blueGrey[900] }
                   }}
+                  onClick={handlePredict}
                 >
                   Predict
                 </Button>

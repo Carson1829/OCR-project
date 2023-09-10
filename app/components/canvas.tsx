@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect, MutableRefObject } from "react";
 import { Button, Paper, useMediaQuery } from "@mui/material";
 import { theme } from "./theme";
 
@@ -8,11 +8,16 @@ class points {
   ys: number[] = [];
 }
 
-export default function Canvas({ xs, sm }: { xs: number; sm: number }) {
+interface Props {
+  xs: number;
+  sm: number;
+  canvasRef: MutableRefObject<HTMLCanvasElement | undefined>;
+}
+
+export default function Canvas({ xs, sm, canvasRef }: Props) {
   const primary_color = theme.palette.primary;
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [mobileCanvas, setMobileCanvas] = useState(isMobile);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [currentStroke, setCurrentStroke] = useState<points>(new points());
   const [strokes, setStrokes] = useState<points[]>([]);
