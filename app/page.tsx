@@ -75,7 +75,7 @@ export default function Home() {
                 >
                   Predict
                 </Button>
-                <Typography variant="h5" sx={{ margin: "10px" }}>
+                <Typography variant="body1" sx={{ margin: "10px" }}>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Est
                   debitis vel soluta minima aliquam architecto aliquid
                   voluptatem esse quibusdam excepturi repellendus culpa
@@ -85,6 +85,19 @@ export default function Home() {
               </div>
             </Paper>
           </Stack>
+          <Paper
+            sx={{ backgroundColor: primary_color.light, padding: "12px" }}
+            elevation={10}
+          >
+            <Typography variant="h4" margin={2}>
+              About the Project
+            </Typography>
+            <Typography variant="body1" sx={{ margin: "10px" }}>
+              This is an application that leverages machine learning methods in
+              order to predict handwritten text. It is build using Next.js and
+              TypeScript on the frontend with
+            </Typography>
+          </Paper>
         </Stack>
       </Box>
     </ThemeProvider>
