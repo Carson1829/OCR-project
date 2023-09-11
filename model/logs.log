@@ -1,0 +1,27 @@
+2023-09-02 21:20:05,573 - tensorflow - WARNING - Callback method `on_train_batch_end` is slow compared to the batch time (batch time: 0.2427s vs `on_train_batch_end` time: 0.7717s). Check your callbacks.
+2023-09-02 21:22:33,656 - root - INFO - Epoch 0; loss: 57.747459411621094; CER: 0.3809872567653656; WER: 0.7311142683029175; val_loss: 13.145435333251953; val_CER: 0.09883871674537659; val_WER: 0.3400084376335144
+2023-09-02 21:25:02,168 - root - INFO - Epoch 1; loss: 15.277731895446777; CER: 0.11721628159284592; WER: 0.38068917393684387; val_loss: 8.413124084472656; val_CER: 0.06521063297986984; val_WER: 0.23585103452205658
+2023-09-02 21:27:30,924 - root - INFO - Epoch 2; loss: 11.324024200439453; CER: 0.08891370892524719; WER: 0.3031020760536194; val_loss: 6.421291828155518; val_CER: 0.04966326430439949; val_WER: 0.18644730746746063
+2023-09-02 21:30:00,097 - root - INFO - Epoch 3; loss: 9.179778099060059; CER: 0.07278765738010406; WER: 0.25930291414260864; val_loss: 5.707489967346191; val_CER: 0.04611622914671898; val_WER: 0.17564187943935394
+2023-09-02 21:32:27,703 - root - INFO - Epoch 4; loss: 8.352707862854004; CER: 0.06878115236759186; WER: 0.24076557159423828; val_loss: 5.267111301422119; val_CER: 0.041162773966789246; val_WER: 0.15787799656391144
+2023-09-02 21:34:54,859 - root - INFO - Epoch 5; loss: 7.126744270324707; CER: 0.057965368032455444; WER: 0.21478651463985443; val_loss: 4.952699661254883; val_CER: 0.03968532755970955; val_WER: 0.1468956470489502
+2023-09-02 21:37:22,957 - root - INFO - Epoch 6; loss: 6.6188788414001465; CER: 0.05371350422501564; WER: 0.200611412525177; val_loss: 4.575112342834473; val_CER: 0.036568526178598404; val_WER: 0.1411398947238922
+2023-09-02 21:39:50,153 - root - INFO - Epoch 7; loss: 6.2433953285217285; CER: 0.05091755464673042; WER: 0.19176213443279266; val_loss: 4.749864101409912; val_CER: 0.03804989531636238; val_WER: 0.14232227206230164
+2023-09-02 21:42:17,338 - root - INFO - Epoch 8; loss: 5.810972690582275; CER: 0.04799892008304596; WER: 0.182660311460495; val_loss: 4.775318145751953; val_CER: 0.037664882838726044; val_WER: 0.14575894176959991
+2023-09-02 21:44:44,533 - root - INFO - Epoch 9; loss: 5.554855823516846; CER: 0.046520501375198364; WER: 0.1762094646692276; val_loss: 28.406641006469727; val_CER: 0.2008931040763855; val_WER: 0.685462474822998
+2023-09-02 21:44:46,097 - tf2onnx.tf_loader - WARNING - Could not search for non-variable resources. Concrete function internal representation may have changed.
+2023-09-02 21:44:48,543 - tf2onnx.tfonnx - INFO - Using tensorflow=2.13.0, onnx=1.14.1, tf2onnx=1.15.1/37820d
+2023-09-02 21:44:48,544 - tf2onnx.tfonnx - INFO - Using opset <onnx, 15>
+2023-09-02 21:44:48,726 - tf2onnx.tf_utils - INFO - Computed 0 values for constant folding
+2023-09-02 21:44:48,732 - tf2onnx.tf_utils - INFO - Computed 0 values for constant folding
+2023-09-02 21:44:48,735 - tf2onnx.tf_utils - INFO - Computed 0 values for constant folding
+2023-09-02 21:44:48,737 - tf2onnx.tf_utils - INFO - Computed 0 values for constant folding
+2023-09-02 21:44:48,743 - tf2onnx.tf_utils - INFO - Computed 0 values for constant folding
+2023-09-02 21:44:48,746 - tf2onnx.tf_utils - INFO - Computed 0 values for constant folding
+2023-09-02 21:44:48,749 - tf2onnx.tf_utils - INFO - Computed 0 values for constant folding
+2023-09-02 21:44:48,755 - tf2onnx.tf_utils - INFO - Computed 0 values for constant folding
+2023-09-02 21:44:48,810 - tf2onnx.tf_utils - INFO - Computed 2 values for constant folding
+2023-09-02 21:44:48,927 - tf2onnx.tfonnx - INFO - folding node using tf type=StridedSlice, name=model/bidirectional/forward_lstm/PartitionedCall/strided_slice
+2023-09-02 21:44:48,929 - tf2onnx.tfonnx - INFO - folding node using tf type=StridedSlice, name=model/bidirectional/backward_lstm/PartitionedCall/strided_slice
+2023-09-02 21:44:49,084 - tf2onnx.optimizer - INFO - Optimizing ONNX model
+2023-09-02 21:44:49,879 - tf2onnx.optimizer - INFO - After optimization: BatchNormalization -18 (18->0), Cast -8 (17->9), Concat -8 (17->9), Const -173 (243->70), Expand -6 (8->2), Gather +3 (2->5), Identity -2 (2->0), Shape -2 (6->4), Slice -2 (9->7), Squeeze -5 (9->4), Transpose -86 (90->4), Unsqueeze -25 (29->4)
