@@ -1,5 +1,6 @@
 "use client";
 import * as React from "react";
+import { useState, useRef, useEffect } from 'react';
 import Canvas from "./components/canvas";
 import {
   Box,
@@ -17,6 +18,12 @@ import { theme } from "./components/theme";
 export default function Home() {
   const isMobile = useMediaQuery("(max-width: 700px)");
   const primary_color = theme.palette.primary;
+  // setState for responsive frontend to any backend calls
+  const [tempMsg, settempMsg] = useState("");
+  const updateTempMsg = (newMsg: React.SetStateAction<string>) => {
+    settempMsg(newMsg);
+  };
+  
   return (
     <ThemeProvider theme={theme}>
       {/* TODO: maybe refactor stylings to css module */}
@@ -42,13 +49,13 @@ export default function Home() {
             sx={{ height: "100%" }}
             justifyContent="center"
           >
-            <Canvas xs={320} sm={400} />
+            <Canvas xs={400} sm={400} tempMsg = {tempMsg} updateTempMsg = {updateTempMsg} />
             <Paper
               sx={{
                 backgroundColor: primary_color.light,
                 height: "100%",
                 padding: { xs: 0, sm: 2 },
-                width: { xs: "98%", sm: "50%" }
+                width: { xs: "100%", sm: "20%" }
               }}
               elevation={5}
             >
@@ -64,23 +71,12 @@ export default function Home() {
                     : {}
                 }
               >
-                {/* TODO: implement predict button and text */}
-                <Button
-                  variant="contained"
-                  sx={{
-                    "margin": "10px",
-                    "backgroundColor": theme.palette.primary.main,
-                    "&:hover": { backgroundColor: blueGrey[900] }
-                  }}
-                >
-                  Predict
-                </Button>
+                <h1>
+                Predicted word:
+                </h1>
                 <Typography variant="h5" sx={{ margin: "10px" }}>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Est
-                  debitis vel soluta minima aliquam architecto aliquid
-                  voluptatem esse quibusdam excepturi repellendus culpa
-                  accusantium officia, assumenda inventore eligendi laudantium
-                  adipisci dignissimos.
+                  {/* Temporary message for now, reacts to backend responses */}
+                  {tempMsg}
                 </Typography>
               </div>
             </Paper>
