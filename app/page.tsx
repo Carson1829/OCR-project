@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { useState, useRef, useEffect } from 'react';
+import { useState } from "react";
 import Canvas from "./components/canvas";
 import {
   Box,
@@ -23,7 +23,7 @@ export default function Home() {
   const updateTempMsg = (newMsg: React.SetStateAction<string>) => {
     settempMsg(newMsg);
   };
-  
+
   return (
     <ThemeProvider theme={theme}>
       {/* TODO: maybe refactor stylings to css module */}
@@ -47,40 +47,72 @@ export default function Home() {
             direction={{ xs: "column", sm: "row" }}
             spacing={2}
             sx={{ height: "100%" }}
-            justifyContent="center"
           >
-            <Canvas xs={400} sm={400} tempMsg = {tempMsg} updateTempMsg = {updateTempMsg} />
+            <Canvas
+              xs={400}
+              sm={400}
+              tempMsg={tempMsg}
+              updateTempMsg={updateTempMsg}
+            />
             <Paper
               sx={{
                 backgroundColor: primary_color.light,
-                height: "100%",
+                height: "400",
                 padding: { xs: 0, sm: 2 },
-                width: { xs: "100%", sm: "20%" }
+                width: "30%"
               }}
-              elevation={5}
             >
               <div
                 style={
                   isMobile
                     ? {
                         display: "flex",
+                        height: "100%",
                         flexDirection: "column",
                         justifyContent: "center",
                         alignItems: "center"
                       }
-                    : {}
+                    : { height: "100%" }
                 }
               >
-                <h1>
-                Predicted word:
-                </h1>
-                <Typography variant="h5" sx={{ margin: "10px" }}>
-                  {/* Temporary message for now, reacts to backend responses */}
-                  {tempMsg}
+                <Typography
+                  variant="h4"
+                  sx={{
+                    textAlign: "center",
+                    height: "max-content",
+                    lineHeight: 2
+                  }}
+                >
+                  Predicted Word
                 </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    height: "80%",
+                    justifyContent: "center",
+                    alignItems: "center"
+                  }}
+                >
+                  <Typography variant="h4" sx={{ margin: "10px" }}>
+                    {tempMsg}
+                  </Typography>
+                </Box>
               </div>
             </Paper>
           </Stack>
+          <Paper
+            sx={{ backgroundColor: primary_color.light, padding: "12px" }}
+            elevation={10}
+          >
+            <Typography variant="h4" margin={2}>
+              About the Project
+            </Typography>
+            <Typography variant="body1" sx={{ margin: "10px" }}>
+              This is an application that leverages machine learning methods in
+              order to predict handwritten text. It is build using Next.js and
+              TypeScript on the frontend with
+            </Typography>
+          </Paper>
         </Stack>
       </Box>
     </ThemeProvider>
