@@ -46,8 +46,6 @@ export default function Home() {
             sx={{ height: "100%" }}
           >
             <Canvas
-              xs={400}
-              sm={400}
               tempMsg={tempMsg}
               updateTempMsg={updateTempMsg}
             />
@@ -56,7 +54,7 @@ export default function Home() {
                 backgroundColor: primary_color.light,
                 height: "400",
                 padding: { xs: 0, sm: 2 },
-                width: "30%"
+                width: { xs: "100%", sm: "30%"}
               }}
             >
               <div

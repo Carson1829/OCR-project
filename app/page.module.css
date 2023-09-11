@@ -12,3 +12,9 @@
     font-size: 1.8rem;
   }
 }
+
+@media (max-width: 1300px) {
+    .heading {
+        font-size: 30pt;
+    }
+}

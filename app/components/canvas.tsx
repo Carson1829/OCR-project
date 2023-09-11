@@ -9,16 +9,15 @@ class points {
 }
 
 export default function Canvas({
-  xs,
-  sm,
   tempMsg,
   updateTempMsg
 }: {
-  xs: number;
-  sm: number;
   tempMsg: string;
   updateTempMsg: Function;
 }) {
+  const sz_xs = 320;
+  const sz_sm = 500;
+  const wid_sm = 700;
   const primary_color = theme.palette.primary;
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [mobileCanvas, setMobileCanvas] = useState(isMobile);
@@ -26,7 +25,8 @@ export default function Canvas({
   const [isDrawing, setIsDrawing] = useState(false);
   const [currentStroke, setCurrentStroke] = useState<points>(new points());
   const [strokes, setStrokes] = useState<points[]>([]);
-  const [size, setSize] = useState(mobileCanvas ? xs : sm);
+  const [size, setSize] = useState(mobileCanvas ? sz_xs : sz_sm);
+  const [width, setWidth] = useState(mobileCanvas ? sz_xs : wid_sm);
   const [left, setL] = useState(0);
   const [top, setTop] = useState(0);
 
@@ -36,7 +36,8 @@ export default function Canvas({
     var ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
     setMobileCanvas(isMobile);
-    setSize(isMobile ? xs : sm);
+    setSize(isMobile ? sz_xs : sz_sm);
+    setWidth(isMobile ? sz_xs : wid_sm);
     setL(canvas.getBoundingClientRect().left);
     setTop(canvas.getBoundingClientRect().top);
 
@@ -44,13 +45,15 @@ export default function Canvas({
       if (isMobile) {
         if (!mobileCanvas) {
           setMobileCanvas(true);
-          setSize(320);
+          setSize(sz_xs);
+          setWidth(sz_xs);
           handleResize();
         }
       } else {
         if (mobileCanvas) {
           setMobileCanvas(false);
-          setSize(400);
+          setSize(sz_sm);
+          setWidth(wid_sm);
           handleResize();
         }
       }
@@ -62,8 +65,8 @@ export default function Canvas({
         var next_strokes = strokes;
         for (var i = 0; i < strokes.length; i++) {
           for (var j = 0; j < strokes[i].point_cnt; j++) {
-            next_strokes[i].xs[j] = Math.round(next_strokes[i].xs[j] * 0.8);
-            next_strokes[i].ys[j] = Math.round(next_strokes[i].ys[j] * 0.8);
+            next_strokes[i].xs[j] = Math.round(next_strokes[i].xs[j] * (sz_xs / sz_sm));
+            next_strokes[i].ys[j] = Math.round(next_strokes[i].ys[j] * (sz_xs / sz_sm));
           }
         }
         setStrokes(next_strokes);
@@ -71,8 +74,8 @@ export default function Canvas({
         var next_strokes = strokes;
         for (var i = 0; i < strokes.length; i++) {
           for (var j = 0; j < strokes[i].point_cnt; j++) {
-            next_strokes[i].xs[j] = Math.round(next_strokes[i].xs[j] / 0.8);
-            next_strokes[i].ys[j] = Math.round(next_strokes[i].ys[j] / 0.8);
+            next_strokes[i].xs[j] = Math.round(next_strokes[i].xs[j] / (sz_xs / sz_sm));
+            next_strokes[i].ys[j] = Math.round(next_strokes[i].ys[j] / (sz_xs / sz_sm));
           }
         }
         setStrokes(next_strokes);
@@ -355,7 +358,7 @@ export default function Canvas({
       >
         <canvas
           ref={canvasRef}
-          width={size}
+          width={width}
           height={size}
           style={{ border: "1px solid black", backgroundColor: "white" }}
         ></canvas>
