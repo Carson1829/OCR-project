@@ -1,6 +1,6 @@
 "use client";
-
-import { useRef } from "react";
+import * as React from "react";
+import { useState } from "react";
 import Canvas from "./components/canvas";
 import axios from "axios";
 import {
@@ -19,27 +19,10 @@ import { theme } from "./components/theme";
 export default function Home() {
   const isMobile = useMediaQuery("(max-width: 700px)");
   const primary_color = theme.palette.primary;
-  const canvasRef = useRef<HTMLCanvasElement>();
-
-  const handlePredict = () => {
-    canvasRef.current?.toBlob(async (blob) => {
-      if (blob) {
-        try {
-          const formData = new FormData();
-          formData.append("handwritting.jpeg", blob);
-          const res = await axios.post(
-            "http://52.9.58.36:5000/predict",
-            formData,
-            {
-              headers: { "Content-Type": "multipart/form-data" }
-            }
-          );
-          console.log(res);
-        } catch (err) {
-          console.log(err);
-        }
-      }
-    });
+  // setState for responsive frontend to any backend calls
+  const [tempMsg, settempMsg] = useState("");
+  const updateTempMsg = (newMsg: React.SetStateAction<string>) => {
+    settempMsg(newMsg);
   };
 
   return (
@@ -65,49 +48,56 @@ export default function Home() {
             direction={{ xs: "column", sm: "row" }}
             spacing={2}
             sx={{ height: "100%" }}
-            justifyContent="center"
           >
-            <Canvas xs={320} sm={400} canvasRef={canvasRef} />
+            <Canvas
+              xs={400}
+              sm={400}
+              tempMsg={tempMsg}
+              updateTempMsg={updateTempMsg}
+            />
             <Paper
               sx={{
                 backgroundColor: primary_color.light,
-                height: "100%",
+                height: "400",
                 padding: { xs: 0, sm: 2 },
-                width: { xs: "98%", sm: "50%" }
+                width: "30%"
               }}
-              elevation={5}
             >
               <div
                 style={
                   isMobile
                     ? {
                         display: "flex",
+                        height: "100%",
                         flexDirection: "column",
                         justifyContent: "center",
                         alignItems: "center"
                       }
-                    : {}
+                    : { height: "100%" }
                 }
               >
-                {/* TODO: implement predict button and text */}
-                <Button
-                  variant="contained"
+                <Typography
+                  variant="h4"
                   sx={{
-                    "margin": "10px",
-                    "backgroundColor": theme.palette.primary.main,
-                    "&:hover": { backgroundColor: blueGrey[900] }
+                    textAlign: "center",
+                    height: "max-content",
+                    lineHeight: 2
                   }}
-                  onClick={handlePredict}
                 >
-                  Predict
-                </Button>
-                <Typography variant="body1" sx={{ margin: "10px" }}>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Est
-                  debitis vel soluta minima aliquam architecto aliquid
-                  voluptatem esse quibusdam excepturi repellendus culpa
-                  accusantium officia, assumenda inventore eligendi laudantium
-                  adipisci dignissimos.
+                  Predicted Word
                 </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    height: "80%",
+                    justifyContent: "center",
+                    alignItems: "center"
+                  }}
+                >
+                  <Typography variant="h4" sx={{ margin: "10px" }}>
+                    {tempMsg}
+                  </Typography>
+                </Box>
               </div>
             </Paper>
           </Stack>

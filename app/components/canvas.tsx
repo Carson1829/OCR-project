@@ -1,4 +1,4 @@
-import { useState, useEffect, MutableRefObject } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button, Paper, useMediaQuery } from "@mui/material";
 import { theme } from "./theme";
 
@@ -8,16 +8,21 @@ class points {
   ys: number[] = [];
 }
 
-interface Props {
+export default function Canvas({
+  xs,
+  sm,
+  tempMsg,
+  updateTempMsg
+}: {
   xs: number;
   sm: number;
-  canvasRef: MutableRefObject<HTMLCanvasElement | undefined>;
-}
-
-export default function Canvas({ xs, sm, canvasRef }: Props) {
+  tempMsg: string;
+  updateTempMsg: Function;
+}) {
   const primary_color = theme.palette.primary;
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [mobileCanvas, setMobileCanvas] = useState(isMobile);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [currentStroke, setCurrentStroke] = useState<points>(new points());
   const [strokes, setStrokes] = useState<points[]>([]);
@@ -159,7 +164,14 @@ export default function Canvas({ xs, sm, canvasRef }: Props) {
     var canvas = canvasRef.current;
     var ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
-    ctx.clearRect(0, 0, size, size);
+    // Set canvas background to white
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.lineWidth = 5;
+    ctx.lineCap = "round";
+
+    // ctx.clearRect(0, 0, size, size);
     ctx.lineWidth = 5;
     ctx.lineCap = "round";
     for (var i = 0; i < strokes.length; i++) {
@@ -199,13 +211,94 @@ export default function Canvas({ xs, sm, canvasRef }: Props) {
     ctx.clearRect(0, 0, size, size);
   };
 
+  const sendJPEGToBackend = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const imgDataUrl = canvas.toDataURL("image/png"); // Converts to a long url
+    const base64Image = imgDataUrl.split(",")[1]; // Extract the base64 part
+
+    const url = "http://localhost:5000/predict"; // Change to the server URL as necessary
+    // const url = 'http://52.9.58.36:5000/predict';
+    const objToSend = {
+      image_data: base64Image // Include the base64-encoded image data in the payload
+    };
+
+    // A little redundant, but works
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+      },
+      body: JSON.stringify(objToSend)
+    })
+      .then(async (response) => {
+        if (response.ok) {
+          // Successful response from the backend
+          console.log("Img link sent to the backend successfully");
+          let backResponse = await response.json(); //.json() later
+          console.log(backResponse.prediction_text);
+          //Updating the text outside using setState function
+          updateTempMsg(backResponse.prediction_text);
+        } else {
+          // Handle errors here
+          console.error("Failed to send JPEG file to the backend");
+        }
+      })
+      .catch((error) => {
+        console.error("Error while sending JPEG file to the backend:", error);
+      });
+  }; /*
+    const sendJPEGToBackend = () => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+    
+        // Get the JPEG data as a Blob
+        canvas.toBlob(blob => {
+            if (!blob) {
+                console.error('Failed to create a Blob from the canvas data.');
+                return;
+            }
+            console.log('Sending JPEG to backend');
+    
+            // Make a POST request to your backend
+            fetch('http://localhost:5000/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'image/jpeg',
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+                },
+                body: blob, // Send the FormData with the Blob
+            })
+            .then(async response => {
+                if (response.ok) {
+                    // Successful response from the backend
+                    console.log('JPEG file sent to the backend successfully');
+                    let backResponse = await response.json(); //.json() later
+                    console.log(backResponse.prediction_text);
+                    //Updating the text outside using setState function
+                    updateTempMsg(backResponse.prediction_text);
+                } else {
+                    // Handle errors here
+                    console.error('Failed to send JPEG file to the backend');
+                }
+            })
+            .catch(error => {
+                console.error('Error while sending JPEG file to the backend:', error);
+            });
+        }, 'image/jpeg');
+    }; */
+
   return (
     <Paper
       sx={{
         backgroundColor: primary_color.light,
         height: "100%",
         padding: { xs: 0, sm: 2 },
-        width: { xs: "98%", sm: "50%" }
+        width: { xs: "98%", sm: "70%" }
       }}
       elevation={5}
     >
@@ -238,6 +331,17 @@ export default function Canvas({ xs, sm, canvasRef }: Props) {
           onClick={undo}
         >
           Undo
+        </Button>
+        <Button
+          variant="contained"
+          sx={{
+            "margin": "10px",
+            "backgroundColor": primary_color.main,
+            "&:hover": { backgroundColor: primary_color.dark }
+          }}
+          onClick={sendJPEGToBackend}
+        >
+          Predict {/* JPEG to backend */}
         </Button>
       </div>
       <div
