@@ -2,17 +2,14 @@
 import * as React from "react";
 import { useState } from "react";
 import Canvas from "./components/canvas";
-import axios from "axios";
 import {
   Box,
   Paper,
   Typography,
-  Button,
   Stack,
   useMediaQuery,
   ThemeProvider
 } from "@mui/material/";
-import { blueGrey } from "@mui/material/colors";
 import styles from "./page.module.css";
 import { theme } from "./components/theme";
 
@@ -27,7 +24,6 @@ export default function Home() {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* TODO: maybe refactor stylings to css module */}
       <Box
         sx={{ width: "98%", height: "100%" }}
         margin={"1%"}

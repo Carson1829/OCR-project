@@ -1,12 +1,9 @@
-```
 import cv2
 import typing
 import numpy as np
-import os
-import requests
 from mltu.configs import BaseModelConfigs
 from mltu.inferenceModel import OnnxInferenceModel
-from mltu.utils.text_utils import ctc_decoder, get_cer, get_wer
+from mltu.utils.text_utils import ctc_decoder
 from mltu.transformers import ImageResizer
 from flask import Flask, jsonify, request
 
@@ -17,7 +14,9 @@ class ImageToWordModel(OnnxInferenceModel):
         self.char_list = char_list
 
     def predict(self, image: np.ndarray):
-        image = ImageResizer.resize_maintaining_aspect_ratio(image, *self.input_shape[:2][::-1])
+        image = ImageResizer.resize_maintaining_aspect_ratio(
+            image, *self.input_shape[:2][::-1]
+        )
 
         image_pred = np.expand_dims(image, axis=0).astype(np.float32)
 
@@ -35,7 +34,8 @@ def inference(m, i):
     predicted_text = m.predict(i)
     return predicted_text
 
-'''
+
+"""
 @app.route('/predict', methods=['POST'])
 def infer_image():
     try:
@@ -82,24 +82,24 @@ def infer_image():
 
     except Exception as e:
         return jsonify(error=f"An error occurred: {str(e)}")
-'''
+"""
+
+
 # Define an endpoint for making predictions
-@app.route('/predict', methods=['POST'])
+@app.route("/predict", methods=["POST"])
 def predict():
     try:
         # Get the image data from the request
         image_data = request.get_data()
 
         if not image_data:
-            return jsonify({'error': 'Image data is missing'})
+            return jsonify({"error": "Image data is missing"})
 
         # Convert the image data to a NumPy array
         image_np = np.frombuffer(image_data, dtype=np.uint8)
         image_np = cv2.imdecode(image_np, cv2.IMREAD_COLOR)
 
-        configs = BaseModelConfigs.load(
-            "../model/configs.yaml"
-        )
+        configs = BaseModelConfigs.load("../model/configs.yaml")
         configs.model_path = "../model/model.onnx"
 
         model = ImageToWordModel(model_path=configs.model_path, char_list=configs.vocab)
@@ -108,9 +108,10 @@ def predict():
         print("Prediction: ", prediction_text)
 
         # Return the prediction result as a JSON object
-        return jsonify({'prediction_text': prediction_text})
+        return jsonify({"prediction_text": prediction_text})
     except Exception as e:
-        return jsonify({'error': str(e)})
+        return jsonify({"error": str(e)})
+
 
 if __name__ == "__main__":
-    app.run(debug=False, host='0.0.0.0')
+    app.run(debug=False, host="0.0.0.0")
