@@ -332,7 +332,7 @@ export default function Canvas({
         paddingBottom: 4,
         paddingLeft: 10,
         paddingRight: 10,
-        width: { xs: "98%", sm: "70%" }
+        width: { xs: "70%", sm: "100%" }
       }}
       elevation={5}
     >
