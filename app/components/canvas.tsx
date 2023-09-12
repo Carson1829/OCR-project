@@ -262,7 +262,7 @@ export default function Canvas({
   const sendJPEGToBackend = async () => {
     if (canvasRef.current) {
       try {
-        const res = await fetch("http://localhost:5000/predict", {
+        const res = await fetch("http://52.9.58.36:5000/predict", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
