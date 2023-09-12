@@ -50,6 +50,7 @@ export default function Canvas({
   const [width, setWidth] = useState(mobileCanvas ? sz_xs : wid_sm);
   const [left, setL] = useState(0);
   const [top, setTop] = useState(0);
+  const [file, setFile] = useState<File>();
 
   // redraw canvas
   useEffect(() => {
@@ -241,173 +242,151 @@ export default function Canvas({
     var ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
     ctx.clearRect(0, 0, width, size);
+
+    if (file) {
+      setFile(undefined);
+    }
   };
 
-  const sendJPEGToBackend = () => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+  const getBase64 = (file: File) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        if (reader.result && typeof reader.result == "string")
+          resolve(reader.result.split(",")[1]);
+      };
+      reader.onerror = reject;
+    });
 
-    const imgDataUrl = canvas.toDataURL("image/png"); // Converts to a long url
-    const base64Image = imgDataUrl.split(",")[1]; // Extract the base64 part
-
-    // const url = "http://localhost:5000/predict"; // Change to the server URL as necessary
-    const url = 'http://52.9.58.36:5000/predict';
-    const objToSend = {
-      image_data: base64Image // Include the base64-encoded image data in the payload
-    };
-
-    // A little redundant, but works
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-      },
-      body: JSON.stringify(objToSend)
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          // Successful response from the backend
-          console.log("Img link sent to the backend successfully");
-          let backResponse = await response.json(); //.json() later
-          console.log(backResponse.prediction_text);
-          //Updating the text outside using setState function
-          updateTempMsg(backResponse.prediction_text);
-        } else {
-          // Handle errors here
-          console.error("Failed to send JPEG file to the backend");
-        }
-      })
-      .catch((error) => {
-        console.error("Error while sending JPEG file to the backend:", error);
-      });
-  }; /*
-    const sendJPEGToBackend = () => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-    
-        // Get the JPEG data as a Blob
-        canvas.toBlob(blob => {
-            if (!blob) {
-                console.error('Failed to create a Blob from the canvas data.');
-                return;
-            }
-            console.log('Sending JPEG to backend');
-    
-            // Make a POST request to your backend
-            fetch('http://52.9.58.36:5000/predict', {
-                method: 'POST',
-    
-                body: blob, // Send the FormData with the Blob
-            })
-            .then(async response => {
-                if (response.ok) {
-                    // Successful response from the backend
-                    console.log('JPEG file sent to the backend successfully');
-                    let backResponse = await response.json(); //.json() later
-                    console.log(backResponse.prediction_text);
-                    //Updating the text outside using setState function
-                    updateTempMsg(backResponse.prediction_text);
-                } else {
-                    // Handle errors here
-                    console.error('Failed to send JPEG file to the backend');
-                }
-            })
-            .catch(error => {
-                console.error('Error while sending JPEG file to the backend:', error);
-            });
-        }, 'image/jpeg');
-    }; */
+  const sendJPEGToBackend = async () => {
+    if (canvasRef.current) {
+      try {
+        const res = await fetch("http://localhost:5000/predict", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+          },
+          body: JSON.stringify({
+            image_data: file
+              ? await getBase64(file)
+              : canvasRef.current.toDataURL("image/png").split(",")[1]
+          })
+        });
+        const data = await res.json();
+        updateTempMsg(data.prediction_text);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
 
   return (
     <ThemeProvider theme={theme}>
-<Paper
-      sx={{
-        backgroundColor: primary_color.light,
-        height: "100%",
-        paddingTop: 4,
-        paddingBottom: 4,
-        paddingLeft: 10,
-        paddingRight: 10,
-        width: { xs: "65%", sm: "100%" }
-      }}
-      elevation={5}
-    >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: 20
+      <Paper
+        sx={{
+          backgroundColor: primary_color.light,
+          height: "100%",
+          paddingTop: 4,
+          paddingBottom: 4,
+          paddingLeft: 10,
+          paddingRight: 10,
+          width: { xs: "65%", sm: "100%" }
         }}
+        elevation={5}
       >
-        <Typography variant="h4">Option 1: Draw</Typography>
-        <div>
-          <Button
-            variant="contained"
-            sx={{
-              "margin": "10px",
-              "backgroundColor": primary_color.main,
-              "&:hover": { backgroundColor: primary_color.dark }
-            }}
-            onClick={clear}
-          >
-            Clear
-          </Button>
-          <Button
-            variant="contained"
-            sx={{
-              "margin": "10px",
-              "backgroundColor": primary_color.main,
-              "&:hover": { backgroundColor: primary_color.dark }
-            }}
-            onClick={undo}
-          >
-            Undo
-          </Button>
-          <Button
-            variant="contained"
-            sx={{
-              "margin": "10px",
-              "backgroundColor": primary_color.main,
-              "&:hover": { backgroundColor: primary_color.dark }
-            }}
-            onClick={sendJPEGToBackend}
-          >
-            Predict {/* JPEG to backend */}
-          </Button>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 20
+          }}
+        >
+          <Typography variant="h4">Option 1: Draw</Typography>
+          <div>
+            <Button
+              variant="contained"
+              sx={{
+                "margin": "10px",
+                "backgroundColor": primary_color.main,
+                "&:hover": { backgroundColor: primary_color.dark }
+              }}
+              onClick={clear}
+            >
+              Clear
+            </Button>
+            <Button
+              variant="contained"
+              sx={{
+                "margin": "10px",
+                "backgroundColor": primary_color.main,
+                "&:hover": { backgroundColor: primary_color.dark }
+              }}
+              onClick={undo}
+            >
+              Undo
+            </Button>
+            <Button
+              variant="contained"
+              sx={{
+                "margin": "10px",
+                "backgroundColor": primary_color.main,
+                "&:hover": { backgroundColor: primary_color.dark }
+              }}
+              onClick={sendJPEGToBackend}
+            >
+              Predict {/* JPEG to backend */}
+            </Button>
+          </div>
         </div>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          margin: "10px"
-        }}
-      >
-        <canvas
-          ref={canvasRef}
-          width={width}
-          height={size}
-          style={{ border: "1px solid black", backgroundColor: "white" }}
-        ></canvas>
-      </div>
-      <Divider sx={{ marginTop: 3, marginBottom: 3 }}>or</Divider>
-      <Typography variant="h4" sx={{ marginBottom: 3 }}>
-        Option 2: Upload an Image
-      </Typography>
-      <Button
-        component="label"
-        variant="contained"
-        startIcon={<CloudUploadIcon />}
-      >
-        Upload an Image
-        <VisuallyHiddenInput type="file" />
-      </Button>
-    </Paper>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "10px"
+          }}
+        >
+          <canvas
+            ref={canvasRef}
+            width={width}
+            height={size}
+            style={{ border: "1px solid black", backgroundColor: "white" }}
+          ></canvas>
+        </div>
+        <Divider sx={{ marginTop: 3, marginBottom: 3 }}>or</Divider>
+        <Typography variant="h4" sx={{ marginBottom: 3 }}>
+          Option 2: Upload an Image
+        </Typography>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 16
+          }}
+        >
+          <Button
+            component="label"
+            variant="contained"
+            startIcon={<CloudUploadIcon />}
+          >
+            Upload an Image
+            <VisuallyHiddenInput
+              type="file"
+              onChange={(event) => {
+                if (event.target.files) {
+                  setFile(event.target.files[0]);
+                }
+              }}
+            />
+          </Button>
+          {file ? <Typography>{file.name}</Typography> : null}
+        </div>
+      </Paper>
     </ThemeProvider>
   );
 }

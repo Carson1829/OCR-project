@@ -34,7 +34,12 @@ export default function Home() {
           justifyContent="center"
         >
           <Paper sx={{ backgroundColor: primary_color.light }}>
-            <Typography variant="h3" margin={3} sx={{ textAlign: "center" }} className={styles.heading}>
+            <Typography
+              variant="h3"
+              margin={3}
+              sx={{ textAlign: "center" }}
+              className={styles.heading}
+            >
               ECS 170 Optical Character Recognition Demo
             </Typography>
           </Paper>
