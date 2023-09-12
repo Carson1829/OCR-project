@@ -1,6 +1,26 @@
 import { useState, useRef, useEffect } from "react";
-import { Button, Paper, useMediaQuery } from "@mui/material";
+import {
+  Button,
+  Divider,
+  Paper,
+  Typography,
+  useMediaQuery
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { theme } from "./theme";
+
+const VisuallyHiddenInput = styled("input")`
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  white-space: nowrap;
+  width: 1px;
+`;
 
 class points {
   point_cnt = 0;
@@ -308,7 +328,10 @@ export default function Canvas({
       sx={{
         backgroundColor: primary_color.light,
         height: "100%",
-        padding: { xs: 0, sm: 2 },
+        paddingTop: 4,
+        paddingBottom: 4,
+        paddingLeft: 10,
+        paddingRight: 10,
         width: { xs: "98%", sm: "70%" }
       }}
       elevation={5}
@@ -316,44 +339,47 @@ export default function Canvas({
       <div
         style={{
           display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center"
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: 20
         }}
       >
-        <Button
-          variant="contained"
-          sx={{
-            "margin": "10px",
-            "backgroundColor": primary_color.main,
-            "&:hover": { backgroundColor: primary_color.dark }
-          }}
-          onClick={clear}
-        >
-          Clear
-        </Button>
-        <Button
-          variant="contained"
-          sx={{
-            "margin": "10px",
-            "backgroundColor": primary_color.main,
-            "&:hover": { backgroundColor: primary_color.dark }
-          }}
-          onClick={undo}
-        >
-          Undo
-        </Button>
-        <Button
-          variant="contained"
-          sx={{
-            "margin": "10px",
-            "backgroundColor": primary_color.main,
-            "&:hover": { backgroundColor: primary_color.dark }
-          }}
-          onClick={sendJPEGToBackend}
-        >
-          Predict {/* JPEG to backend */}
-        </Button>
+        <Typography variant="h4">Option 1: Draw</Typography>
+        <div>
+          <Button
+            variant="contained"
+            sx={{
+              "margin": "10px",
+              "backgroundColor": primary_color.main,
+              "&:hover": { backgroundColor: primary_color.dark }
+            }}
+            onClick={clear}
+          >
+            Clear
+          </Button>
+          <Button
+            variant="contained"
+            sx={{
+              "margin": "10px",
+              "backgroundColor": primary_color.main,
+              "&:hover": { backgroundColor: primary_color.dark }
+            }}
+            onClick={undo}
+          >
+            Undo
+          </Button>
+          <Button
+            variant="contained"
+            sx={{
+              "margin": "10px",
+              "backgroundColor": primary_color.main,
+              "&:hover": { backgroundColor: primary_color.dark }
+            }}
+            onClick={sendJPEGToBackend}
+          >
+            Predict {/* JPEG to backend */}
+          </Button>
+        </div>
       </div>
       <div
         style={{
@@ -371,6 +397,18 @@ export default function Canvas({
           style={{ border: "1px solid black", backgroundColor: "white" }}
         ></canvas>
       </div>
+      <Divider sx={{ marginTop: 3, marginBottom: 3 }}>or</Divider>
+      <Typography variant="h4" sx={{ marginBottom: 3 }}>
+        Option 2: Upload an Image
+      </Typography>
+      <Button
+        component="label"
+        variant="contained"
+        startIcon={<CloudUploadIcon />}
+      >
+        Upload an Image
+        <VisuallyHiddenInput type="file" />
+      </Button>
     </Paper>
   );
 }

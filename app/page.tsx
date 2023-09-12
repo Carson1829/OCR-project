@@ -70,7 +70,7 @@ export default function Home() {
                   sx={{
                     textAlign: "center",
                     height: "max-content",
-                    lineHeight: 2
+                    lineHeight: 2.75
                   }}
                 >
                   Predicted Word
