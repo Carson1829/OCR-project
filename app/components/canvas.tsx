@@ -250,8 +250,8 @@ export default function Canvas({
     const imgDataUrl = canvas.toDataURL("image/png"); // Converts to a long url
     const base64Image = imgDataUrl.split(",")[1]; // Extract the base64 part
 
-    const url = "http://localhost:5000/predict"; // Change to the server URL as necessary
-    // const url = 'http://52.9.58.36:5000/predict';
+    // const url = "http://localhost:5000/predict"; // Change to the server URL as necessary
+    const url = 'http://52.9.58.36:5000/predict';
     const objToSend = {
       image_data: base64Image // Include the base64-encoded image data in the payload
     };
