@@ -16,7 +16,7 @@ import { theme } from "./components/theme";
 import About from "./components/about";
 
 export default function Home() {
-  const isMobile = useMediaQuery("(max-width: 700px)");
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const primary_color = theme.palette.primary;
   // setState for responsive frontend to any backend calls
   const [tempMsg, settempMsg] = useState("");
@@ -34,7 +34,7 @@ export default function Home() {
           justifyContent="center"
         >
           <Paper sx={{ backgroundColor: primary_color.light }}>
-            <Typography variant="h3" margin={3} sx={{ textAlign: "center" }}>
+            <Typography variant="h3" margin={3} sx={{ textAlign: "center" }} className={styles.heading}>
               ECS 170 Optical Character Recognition Demo
             </Typography>
           </Paper>
@@ -49,7 +49,7 @@ export default function Home() {
                 backgroundColor: primary_color.light,
                 height: "400",
                 padding: { xs: 0, sm: 2 },
-                width: { xs: "100%", sm: "30%" }
+                width: { xs: "100%", sm: "35%" }
               }}
             >
               <div

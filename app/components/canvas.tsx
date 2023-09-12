@@ -4,7 +4,8 @@ import {
   Divider,
   Paper,
   Typography,
-  useMediaQuery
+  useMediaQuery,
+  ThemeProvider
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
@@ -324,7 +325,8 @@ export default function Canvas({
     }; */
 
   return (
-    <Paper
+    <ThemeProvider theme={theme}>
+<Paper
       sx={{
         backgroundColor: primary_color.light,
         height: "100%",
@@ -332,7 +334,7 @@ export default function Canvas({
         paddingBottom: 4,
         paddingLeft: 10,
         paddingRight: 10,
-        width: { xs: "70%", sm: "100%" }
+        width: { xs: "65%", sm: "100%" }
       }}
       elevation={5}
     >
@@ -410,5 +412,6 @@ export default function Canvas({
         <VisuallyHiddenInput type="file" />
       </Button>
     </Paper>
+    </ThemeProvider>
   );
 }
