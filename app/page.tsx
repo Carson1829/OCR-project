@@ -12,6 +12,7 @@ import {
 } from "@mui/material/";
 import styles from "./page.module.css";
 import { theme } from "./components/theme";
+import About from "./components/about";
 
 export default function Home() {
   const isMobile = useMediaQuery("(max-width: 700px)");
@@ -30,7 +31,7 @@ export default function Home() {
         justifyContent="center"
       >
         <Stack
-          spacing={3}
+          spacing={2}
           sx={{ height: "95%" }}
           padding={1}
           justifyContent="center"
@@ -95,19 +96,7 @@ export default function Home() {
               </div>
             </Paper>
           </Stack>
-          <Paper
-            sx={{ backgroundColor: primary_color.light, padding: "12px" }}
-            elevation={10}
-          >
-            <Typography variant="h4" margin={2}>
-              About the Project
-            </Typography>
-            <Typography variant="body1" sx={{ margin: "10px" }}>
-              This is an application that leverages machine learning methods in
-              order to predict handwritten text. It is build using Next.js and
-              TypeScript on the frontend with
-            </Typography>
-          </Paper>
+          <About></About>
         </Stack>
       </Box>
     </ThemeProvider>
