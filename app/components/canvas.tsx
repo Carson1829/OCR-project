@@ -259,7 +259,11 @@ export default function Canvas({
     // A little redundant, but works
     fetch(url, {
       method: "POST",
-      
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+      },
       body: JSON.stringify(objToSend)
     })
       .then(async (response) => {
