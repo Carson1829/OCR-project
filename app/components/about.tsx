@@ -10,8 +10,7 @@ export default function About() {
         display: "flex",
         flexDirection: "column",
         gap: 4,
-        paddingTop: 6,
-        paddingBottom: 6
+        padding: 6
       }}
       elevation={10}
     >

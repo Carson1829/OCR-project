@@ -3,6 +3,7 @@ import * as React from "react";
 import { useState } from "react";
 import Canvas from "./components/canvas";
 import {
+  Container,
   Box,
   Paper,
   Typography,
@@ -25,19 +26,15 @@ export default function Home() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box
-        sx={{ width: "98%", height: "100%" }}
-        margin={"1%"}
-        justifyContent="center"
-      >
+      <Container>
         <Stack
           spacing={2}
           sx={{ height: "95%" }}
           padding={1}
           justifyContent="center"
         >
-          <Paper sx={{ backgroundColor: primary_color.light }} elevation={10}>
-            <Typography variant="h2" margin={2} className={styles.heading}>
+          <Paper sx={{ backgroundColor: primary_color.light }}>
+            <Typography variant="h3" margin={3} sx={{ textAlign: "center" }}>
               ECS 170 Optical Character Recognition Demo
             </Typography>
           </Paper>
@@ -46,16 +43,13 @@ export default function Home() {
             spacing={2}
             sx={{ height: "100%" }}
           >
-            <Canvas
-              tempMsg={tempMsg}
-              updateTempMsg={updateTempMsg}
-            />
+            <Canvas tempMsg={tempMsg} updateTempMsg={updateTempMsg} />
             <Paper
               sx={{
                 backgroundColor: primary_color.light,
                 height: "400",
                 padding: { xs: 0, sm: 2 },
-                width: { xs: "100%", sm: "30%"}
+                width: { xs: "100%", sm: "30%" }
               }}
             >
               <div
@@ -96,9 +90,9 @@ export default function Home() {
               </div>
             </Paper>
           </Stack>
-          <About></About>
+          <About />
         </Stack>
-      </Box>
+      </Container>
     </ThemeProvider>
   );
 }

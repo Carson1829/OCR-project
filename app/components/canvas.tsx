@@ -65,8 +65,12 @@ export default function Canvas({
         var next_strokes = strokes;
         for (var i = 0; i < strokes.length; i++) {
           for (var j = 0; j < strokes[i].point_cnt; j++) {
-            next_strokes[i].xs[j] = Math.round(next_strokes[i].xs[j] * (sz_xs / sz_sm));
-            next_strokes[i].ys[j] = Math.round(next_strokes[i].ys[j] * (sz_xs / sz_sm));
+            next_strokes[i].xs[j] = Math.round(
+              next_strokes[i].xs[j] * (sz_xs / sz_sm)
+            );
+            next_strokes[i].ys[j] = Math.round(
+              next_strokes[i].ys[j] * (sz_xs / sz_sm)
+            );
           }
         }
         setStrokes(next_strokes);
@@ -74,8 +78,12 @@ export default function Canvas({
         var next_strokes = strokes;
         for (var i = 0; i < strokes.length; i++) {
           for (var j = 0; j < strokes[i].point_cnt; j++) {
-            next_strokes[i].xs[j] = Math.round(next_strokes[i].xs[j] / (sz_xs / sz_sm));
-            next_strokes[i].ys[j] = Math.round(next_strokes[i].ys[j] / (sz_xs / sz_sm));
+            next_strokes[i].xs[j] = Math.round(
+              next_strokes[i].xs[j] / (sz_xs / sz_sm)
+            );
+            next_strokes[i].ys[j] = Math.round(
+              next_strokes[i].ys[j] / (sz_xs / sz_sm)
+            );
           }
         }
         setStrokes(next_strokes);
