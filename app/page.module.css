@@ -1,14 +1,5 @@
-.heading {
-  margin: 10px;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  justify-content: center;
-}
-
 @media (max-width: 700px) {
-    .heading {
-        font-size: 2rem;
-    }
+  .heading {
+    font-size: 2rem;
+  }
 }
