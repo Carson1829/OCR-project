@@ -36,7 +36,7 @@ export default function Canvas({
   updateTempMsg: Function;
 }) {
   const sz_xs = 320;
-  const sz_sm = 500;
+  const sz_sm = 400;
   const wid_sm = 700;
   const primary_color = theme.palette.primary;
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -239,7 +239,7 @@ export default function Canvas({
     var canvas = canvasRef.current;
     var ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
-    ctx.clearRect(0, 0, size, size);
+    ctx.clearRect(0, 0, width, size);
   };
 
   const sendJPEGToBackend = () => {
