@@ -1,8 +1,11 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Merienda } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
+const merien = Merienda({subsets: ['latin']})
+const classes = `${inter.className} ${merien.className}`
 
 export const metadata: Metadata = {
     title: 'ECS 170 OCR Demo',
@@ -16,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={classes}>{children}</body>
     </html>
   )
 }

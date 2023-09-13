@@ -13,3 +13,19 @@ body {
         overflow: scroll;
     }
 }
+
+#predictionButton:hover{
+    cursor: url("https://cdn.custom-cursor.com/db/10857/32/minimal-brain-pointer.png") , auto;
+    }
+
+#uploadButton:hover{
+    cursor: url("https://cdn.custom-cursor.com/db/10571/32/minimal-ow-pointer.png") , auto;
+    }
+
+canvas:hover{
+    cursor: url("https://cdn.custom-cursor.com/db/10863/32/minimal-pencil-pointer.png") , auto;
+  }
+
+html, body, .MuiButton-root, a, a:hover{
+    cursor: url("https://cdn.custom-cursor.com/db/10894/32/minimal-pirate-hat-cursor.png") , auto;
+  }

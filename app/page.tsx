@@ -37,7 +37,7 @@ export default function Home() {
             <Typography
               variant="h3"
               margin={3}
-              sx={{ textAlign: "center" }}
+              sx={{ textAlign: "center", fontFamily: "__Merienda_9ceaa0", fontWeight: "medium"}}
               className={styles.heading}
             >
               ECS 170 Optical Character Recognition Demo
@@ -75,7 +75,9 @@ export default function Home() {
                   sx={{
                     textAlign: "center",
                     height: "max-content",
-                    lineHeight: 2.75
+                    lineHeight: 2.75,
+                    fontFamily: "Inter", 
+                    fontWeight: "regular"
                   }}
                 >
                   Predicted Word
@@ -88,7 +90,7 @@ export default function Home() {
                     alignItems: "center"
                   }}
                 >
-                  <Typography variant="h4" sx={{ margin: "10px" }}>
+                  <Typography variant="h4" sx={{ margin: "8px", fontFamily: "Inter", fontWeight: "regular"}}>
                     {tempMsg}
                   </Typography>
                 </Box>
