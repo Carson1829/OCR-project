@@ -20,15 +20,15 @@ export default function About() {
       <Container>
         <Typography variant="h5">Overview</Typography>
         <Typography variant="body1">
-          This is an web application that leverages machine learning methods in
+          This is a web application that leverages machine learning methods in
           order to predict handwritten text. The application itself is built
           using Next.js, TypeScript, and Material UI on the frontend with Flask
           on the backend. The machine learning model itself is created
           using TensorFlow and Keras. This application is deployed on Vercel.
           The overall goal of this application is to provide users an ease of 
           access to character recognition with interactive features similar to 
-          Google Translate&lsquo;'s features. While we trained it on English for the scope
-          of this project, foreign non-latin characters could potentially be predicted
+          Google Translate's features. While we trained it on English for the scope
+          of this project, foreign non-Latin characters could potentially be predicted
           if given additional resources like time and comprehensive datasets of other languages.
         </Typography>
       </Container>
