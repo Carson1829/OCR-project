@@ -27,7 +27,7 @@ export default function About() {
           using TensorFlow and Keras. This application is deployed on Vercel.
           The overall goal of this application is to provide users an ease of 
           access to character recognition with interactive features similar to 
-          Google Translate's features. While we trained it on English for the scope
+          Google Translate&lsquo;'s features. While we trained it on English for the scope
           of this project, foreign non-latin characters could potentially be predicted
           if given additional resources like time and comprehensive datasets of other languages.
         </Typography>
