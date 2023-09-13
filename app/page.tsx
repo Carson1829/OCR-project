@@ -11,7 +11,6 @@ import {
   useMediaQuery,
   ThemeProvider
 } from "@mui/material/";
-import styles from "./page.module.css";
 import { theme } from "./components/theme";
 import About from "./components/about";
 
@@ -34,12 +33,7 @@ export default function Home() {
           justifyContent="center"
         >
           <Paper sx={{ backgroundColor: primary_color.light }}>
-            <Typography
-              variant="h3"
-              margin={3}
-              sx={{ textAlign: "center", fontFamily: "__Merienda_9ceaa0", fontWeight: "medium"}}
-              className={styles.heading}
-            >
+            <Typography variant="h3" margin={3} sx={{ textAlign: "center" }}>
               ECS 170 Optical Character Recognition Demo
             </Typography>
           </Paper>
@@ -74,10 +68,7 @@ export default function Home() {
                   variant="h4"
                   sx={{
                     textAlign: "center",
-                    height: "max-content",
-                    lineHeight: 2.75,
-                    fontFamily: "Inter", 
-                    fontWeight: "regular"
+                    lineHeight: 2.5
                   }}
                 >
                   Predicted Word
@@ -90,7 +81,12 @@ export default function Home() {
                     alignItems: "center"
                   }}
                 >
-                  <Typography variant="h4" sx={{ margin: "8px", fontFamily: "Inter", fontWeight: "regular"}}>
+                  <Typography
+                    variant="h4"
+                    sx={{
+                      margin: "8px"
+                    }}
+                  >
                     {tempMsg}
                   </Typography>
                 </Box>

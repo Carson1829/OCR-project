@@ -289,8 +289,8 @@ export default function Canvas({
         sx={{
           backgroundColor: primary_color.light,
           height: "100%",
-          paddingTop: 4,
-          paddingBottom: 4,
+          paddingTop: 5,
+          paddingBottom: 5,
           paddingLeft: 10,
           paddingRight: 10,
           width: { xs: "65%", sm: "100%" }
@@ -305,38 +305,22 @@ export default function Canvas({
             marginBottom: 20
           }}
         >
-          <Typography variant="h4" sx={{fontFamily: "Inter", fontWeight: "regular"}}>Option 1: Draw</Typography>
-          <div>
-            <Button
-              variant="contained"
-              sx={{
-                "margin": "10px",
-                "backgroundColor": primary_color.main,
-                "&:hover": { backgroundColor: primary_color.dark }
-              }}
-              onClick={clear}
-            >
+          <Typography variant="h4">Option 1: Draw</Typography>
+          <div
+            style={{
+              display: "flex",
+              gap: "12px"
+            }}
+          >
+            <Button variant="contained" onClick={clear}>
               Clear
             </Button>
-            <Button
-              variant="contained"
-              sx={{
-                "margin": "10px",
-                "backgroundColor": primary_color.main,
-                "&:hover": { backgroundColor: primary_color.dark }
-              }}
-              onClick={undo}
-            >
+            <Button variant="contained" onClick={undo}>
               Undo
             </Button>
             <Button
               variant="contained"
-              sx={{
-                "margin": "10px",
-                "backgroundColor": primary_color.main,
-                "&:hover": { backgroundColor: primary_color.dark }
-              }}
-              id = "predictionButton"
+              id="predictionButton"
               onClick={sendJPEGToBackend}
             >
               Predict {/* JPEG to backend */}
@@ -360,7 +344,7 @@ export default function Canvas({
           ></canvas>
         </div>
         <Divider sx={{ marginTop: 3, marginBottom: 3 }}>or</Divider>
-        <Typography variant="h4" sx={{ marginBottom: 3, fontFamily: "Inter", fontWeight: "regular"}}>
+        <Typography variant="h4" sx={{ marginBottom: 3 }}>
           Option 2: Upload an Image
         </Typography>
         <div
@@ -374,7 +358,7 @@ export default function Canvas({
             component="label"
             variant="contained"
             startIcon={<CloudUploadIcon />}
-            id = "uploadButton"
+            id="uploadButton"
           >
             Upload an Image
             <VisuallyHiddenInput

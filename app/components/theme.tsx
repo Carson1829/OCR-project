@@ -17,12 +17,5 @@ export const theme = createTheme({
       light: blueGrey[300],
       dark: blueGrey[900]
     }
-  },
-  typography: {
-    "fontFamily": `"Roboto", "Helvetica", "Merienda", "Inter", "Arial"`,
-    "fontSize": 14,
-    "fontWeightLight": 300,
-    "fontWeightRegular": 500,
-    "fontWeightMedium": 900,
   }
 });
