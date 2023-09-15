@@ -165,7 +165,7 @@ export default function About() {
           }}
         >
           <ListItem sx={{ display: "list-item" }}>
-            Ali Osmani - Model, Backend
+            Ali Osmani - Model, Backend, Deployment
           </ListItem>
           <ListItem sx={{ display: "list-item" }}>
             Masaki Takeuchi - Model, Frontend
