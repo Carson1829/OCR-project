@@ -56,7 +56,7 @@ export default function About() {
           of the project to allow for handwritten words and sentences as well.
           After some research, it became clear that we would be able to run a
           more complex model. We ultimately decided on creating an AI model
-          trained on the IAM handwriting database (https://fki.tic.heia-fr.ch/databases/iam-handwriting-database).
+          trained on the IAM handwriting database: <a href="https://fki.tic.heia-fr.ch/databases/iam-handwriting-database">IAM-Handwriting Database</a>.
           For our sentence recognition model, we had both convolutional neural
           network and recurrent neural network parts. The CNN component is built
           using residual blocks which makes training easier. This component is
@@ -101,7 +101,7 @@ export default function About() {
           accordingly. We noticed that drawing large on canvas would net more
           accurate predictions which means our canvas could be improved by normalizing
           what is drawn on there. Certain letters remained elusive and easily confused
-          like: "j", "i", "t", "l", "s".
+          like: 'j', 'i', 't', 'l', 's' and more.
           Each member had slightly different backend servers to allow 
           them test locally as keeping the true server online costed money. Inconsistency
           in this area was settled once more developers stuck with the Flask implementation.
@@ -141,7 +141,7 @@ export default function About() {
       </Container>
        <Container>
         <Typography variant="h5" marginBottom={2}>
-          Reference
+          References
         </Typography>
         <Typography variant="body1">
           Since none of us had significant experience with AI and machine learning before 
@@ -154,6 +154,11 @@ export default function About() {
           We used Next.js to streamline the environment for frontend. <a href="https://nextjs.org/docs">Next.js and Vercel</a>
           <br></br>
           Material UI library was also used in development <a href="https://mui.com/material-ui/getting-started/">Material UI</a>
+          <br></br>
+          For more information on the timeline and results of our development, please visit the final presentation slides <a href="https://docs.google.com/presentation/d/1WYvEOhrlwOHoHyqLw9ayek6N3k5ojSqqLdyzZN91wGM/edit?usp=sharing">here.</a>
+          <br></br>
+          We thank you for reading about our project.
+
         </Typography>
       </Container>
       <Container>
@@ -165,19 +170,19 @@ export default function About() {
           }}
         >
           <ListItem sx={{ display: "list-item" }}>
-            Ali Osmani - Model, Backend
+          <a href="https://github.com/aosmani38">Ali Osmani</a> - Model, Backend
           </ListItem>
           <ListItem sx={{ display: "list-item" }}>
-            Masaki Takeuchi - Model, Frontend
+          <a href="https://github.com/takeuchi-masaki">Masaki Takeuchi</a> - Model, Frontend
           </ListItem>
           <ListItem sx={{ display: "list-item" }}>
-            Derek Ma - Frontend, Backend
+          <a href="https://github.com/danderekma">Derek Ma</a> - Frontend, Backend
           </ListItem>
           <ListItem sx={{ display: "list-item" }}>
-            Carson Chiem - Frontend, Backend
+          <a href="https://github.com/Carsontheboss909">Carson Chiem</a> - Frontend, Backend
           </ListItem>
           <ListItem sx={{ display: "list-item" }}>
-            Steven Chang - Frontend, Backend
+          <a href="https://github.com/stdChang">Steven Chang</a>  - Frontend, Backend
           </ListItem>
         </List>
       </Container>
