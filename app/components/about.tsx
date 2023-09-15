@@ -101,7 +101,7 @@ export default function About() {
           accordingly. We noticed that drawing large on canvas would net more
           accurate predictions which means our canvas could be improved by normalizing
           what is drawn on there. Certain letters remained elusive and easily confused
-          like: j, i, t, l, s.
+          like: j, i, t, l, s, and more.
           Each member had slightly different backend servers to allow 
           them test locally as keeping the true server online costed money. Inconsistency
           in this area was settled once more developers stuck with the Flask implementation.
@@ -170,7 +170,7 @@ export default function About() {
           }}
         >
           <ListItem sx={{ display: "list-item" }}>
-          <a href="https://github.com/aosmani38">Ali Osmani</a> - Model, Backend
+          <a href="https://github.com/aosmani38">Ali Osmani</a> - Model, Backend, Deployment
           </ListItem>
           <ListItem sx={{ display: "list-item" }}>
           <a href="https://github.com/takeuchi-masaki">Masaki Takeuchi</a> - Model, Frontend
@@ -182,7 +182,7 @@ export default function About() {
           <a href="https://github.com/Carsontheboss909">Carson Chiem</a> - Frontend, Backend
           </ListItem>
           <ListItem sx={{ display: "list-item" }}>
-          <a href="https://github.com/stdChang">Steven Chang</a>  - Frontend, Backend
+          <a href="https://github.com/stdChang">Steven Chang</a>  - Frontend, Backend, Report
           </ListItem>
         </List>
       </Container>
