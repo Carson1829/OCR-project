@@ -44,13 +44,29 @@ export default function About() {
           The Model
         </Typography>
         <Typography variant="body1">
-          Our model utilizes a combination of Convolutional Neural Network (CNN)
-          layers and Recurrent Neural Network (RNN) layers. The purpose of the
-          CNN layers are to extract features of characters from the images,
-          while the RNN layers predict the sequences of characters since
-          previous characters can help predict the following characters. Our
-          model is then compiled using the CTC loss function and the Adam
-          optimizer.
+        nitially, the scope of the project was to create an AI model trained on 
+        the MNIST dataset to create a web application that can read and predict a 
+        handwritten digit. However, we decided to broaden the scope of the project 
+        to allow for handwritten words and sentences as well. After some research, 
+        it became clear that we would be able to run a more complex model. We ultimately
+        decided on creating an AI model trained on the IAM handwriting database (https://fki.tic.heia-fr.ch/databases/iam-handwriting-database).
+        For our sentence recognition model, we had both convolutional neural network and 
+        recurrent neural network parts. The CNN component is built using residual blocks 
+        which makes training easier. This component is used to extract features from the 
+        input images, with each convolution layer focusing on certain features for the model 
+        to process. The nature of the residual blocks allows for skip connections which combine 
+        the input with the output of the convolutional layers as the total output. Residual blocks 
+        also help reduce the vanishing gradient problem. The RNN component is built using bidirectional 
+        long short term memory layers. This part is responsible for taking the output of CNN layers and 
+        processing it to predict characters or elements in the text sequence. It is able to process
+        sequences of features extracted from the images in both forward and backward directions, 
+        capturing dependencies from both directions. Dropout regularization is applied after each 
+        layer to reduce overfitting. It does this by randomly setting a fraction of inputs to 0 during 
+        training. The output of the model is the predicted text sequence. For the activation function, we 
+        used leaky relu. The difference between this and standard relu is that instead of the
+        output being 0 when x is negative, the output is a small non-zero value. 
+        This helps to prevent the dying relu problem so that neurons can still learn during
+        backpropagation even if the input was negative.
         </Typography>
       </Container>
       <Container>
