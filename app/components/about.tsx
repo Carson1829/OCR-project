@@ -74,6 +74,18 @@ export default function About() {
           data set that the model learned on.
         </Typography>
       </Container>
+       <Container>
+        <Typography variant="h5" marginBottom={2}>
+          Reference
+        </Typography>
+        <Typography variant="body1">
+          Since none of us had significant experience with AI and machine learning before 
+          taking this class, we decided to take inspiration from a tutorial we found from 
+          pylessons. We learned and scaffolded code from the tutorial because we had not reached 
+          the neural network section of the class by the time we started working on the project. 
+          The tutorial is linked here: <a href="https://pylessons.com/handwritten-sentence-recognition">https://pylessons.com/handwritten-sentence-recognition</a>
+        </Typography>
+      </Container>
       <Container>
         <Typography variant="h5">Contributors</Typography>
         <List
