@@ -29,7 +29,7 @@ export default function About() {
           TensorFlow and Keras. This application is deployed on Vercel. The
           overall goal of this application is to provide users an ease of access
           to character recognition with interactive features similar to Google
-          Translate's features. Draw your words or submit images of your own on
+          Translate features. Draw your words or submit images of your own on
           the go, this handy tool can be a place to quickly jot things down. 
           While we trained it on English for the scope of this project, foreign 
           non-Latin characters could potentially be predicted if given additional 
@@ -101,7 +101,7 @@ export default function About() {
           accordingly. We noticed that drawing large on canvas would net more
           accurate predictions which means our canvas could be improved by normalizing
           what is drawn on there. Certain letters remained elusive and easily confused
-          like: 'j', 'i', 't', 'l', 's' and more.
+          like: j, i, t, l, s.
           Each member had slightly different backend servers to allow 
           them test locally as keeping the true server online costed money. Inconsistency
           in this area was settled once more developers stuck with the Flask implementation.
@@ -120,7 +120,7 @@ export default function About() {
           <br></br>
           Deploying our machine learning model on AWS using SageMaker presented us 
           with some initial challenges. Specifically, we encountered issues related 
-          to SageMaker's ability to load our model. Despite our efforts to resolve the 
+          to SageMaker ability to load our model. Despite our efforts to resolve the 
           error by consulting AWS documentation, we were unable to achieve a successful 
           deployment using SageMaker.
           As a solution, we decided to take a different approach. We developed custom code to 
