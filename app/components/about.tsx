@@ -88,6 +88,28 @@ export default function About() {
           delivers. This gives the user free reign to submit images of
           handwriting that are higher-quality or styled closer in regards to the
           data set that the model learned on.
+
+          <br></br>
+          <br></br>
+          Deploying our machine learning model on AWS using SageMaker presented us 
+          with some initial challenges. Specifically, we encountered issues related 
+          to SageMaker's ability to load our model. Despite our efforts to resolve the 
+          error by consulting AWS documentation, we were unable to achieve a successful 
+          deployment using SageMaker.
+          As a solution, we decided to take a different approach. We developed custom code to 
+          load our machine learning model and perform predictions on input images. To facilitate 
+          communication between the front-end and the back-end, we implemented a Flask application.
+          This application would respond to POST requests from the front-end by executing the necessary
+          model inference code.
+          To host our back-end application, we provisioned an Amazon Elastic Compute Cloud (EC2) instance. 
+          On this EC2 instance, we installed Gunicorn to run our back-end server efficiently. Additionally, 
+          we set up another EC2 instance to host our front-end. On this second EC2 instance, we installed an
+          Apache web server to serve the front-end user interface.
+          To ensure seamless user access, we established a DNS record for our website. 
+          This allowed users to access our application through a single, user-friendly URL. 
+          In summary, while our initial attempts with SageMaker encountered challenges, our alternative
+          approach utilizing custom code, Flask, EC2 instances, Gunicorn, Apache, and DNS configuration 
+          ultimately resulted in a successfully deployed and accessible machine learning application.
         </Typography>
       </Container>
        <Container>
