@@ -15,7 +15,7 @@ export default function About() {
       elevation={10}
     >
       <Container>
-        <Typography variant="h4">About the Project</Typography>
+        <Typography variant="h3">About the Project</Typography>
       </Container>
       <Container>
         <Typography variant="h5" marginBottom={2}>
@@ -29,11 +29,15 @@ export default function About() {
           TensorFlow and Keras. This application is deployed on Vercel. The
           overall goal of this application is to provide users an ease of access
           to character recognition with interactive features similar to Google
-          Translate&apos;s features. While we trained it on English for the
-          scope of this project, foreign non-Latin characters could potentially
-          be predicted if given additional resources like time and comprehensive
-          datasets of other languages.
+          Translate's features. Draw your words or submit images of your own on
+          the go, this handy tool can be a place to quickly jot things down. 
+          While we trained it on English for the scope of this project, foreign 
+          non-Latin characters could potentially be predicted if given additional 
+          resources like time and comprehensive datasets of other languages. 
         </Typography>
+      </Container>
+      <Container>
+        <Typography variant="h4">Methodology and Development</Typography>
       </Container>
       <Container>
         <Typography variant="h5" marginBottom={2}>
